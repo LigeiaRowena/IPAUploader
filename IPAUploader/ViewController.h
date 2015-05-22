@@ -12,5 +12,6 @@
 @interface ViewController : NSViewController <IRTextFieldDragDelegate>
 
 @property (weak) IBOutlet IRTextFieldDrag *ipaField;
+@property (weak) IBOutlet NSProgressIndicator *progressBar;
 
 @end

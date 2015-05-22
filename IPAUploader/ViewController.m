@@ -51,4 +51,9 @@
     }
 }
 
+- (IBAction)upload:(id)sender
+{
+    [self.progressBar startAnimation:nil];
+}
+
 @end
