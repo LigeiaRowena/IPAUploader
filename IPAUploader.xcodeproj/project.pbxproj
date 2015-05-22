@@ -9,20 +9,11 @@
 /* Begin PBXBuildFile section */
 		DF060E991B0F6331003450C5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060E981B0F6331003450C5 /* AppDelegate.m */; };
 		DF060E9B1B0F6331003450C5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060E9A1B0F6331003450C5 /* main.m */; };
-		DF060E9D1B0F6331003450C5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF060E9C1B0F6331003450C5 /* Images.xcassets */; };
 		DF060EA01B0F6331003450C5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF060E9E1B0F6331003450C5 /* MainMenu.xib */; };
-		DF060EAC1B0F6331003450C5 /* IPAUploaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060EAB1B0F6331003450C5 /* IPAUploaderTests.m */; };
+		DF060EB81B0F6400003450C5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060EB61B0F6400003450C5 /* ViewController.m */; };
+		DF060EB91B0F6400003450C5 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF060EB71B0F6400003450C5 /* ViewController.xib */; };
+		DF060EBE1B0F6478003450C5 /* IRTextFieldDrag.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DF060EA61B0F6331003450C5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DF060E8A1B0F6331003450C5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DF060E911B0F6331003450C5;
-			remoteInfo = IPAUploader;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DF060E921B0F6331003450C5 /* IPAUploader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IPAUploader.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,22 +21,16 @@
 		DF060E971B0F6331003450C5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DF060E981B0F6331003450C5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DF060E9A1B0F6331003450C5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DF060E9C1B0F6331003450C5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DF060E9F1B0F6331003450C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		DF060EA51B0F6331003450C5 /* IPAUploaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IPAUploaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DF060EAA1B0F6331003450C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DF060EAB1B0F6331003450C5 /* IPAUploaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IPAUploaderTests.m; sourceTree = "<group>"; };
+		DF060EB51B0F6400003450C5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DF060EB61B0F6400003450C5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DF060EB71B0F6400003450C5 /* ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		DF060EBC1B0F6478003450C5 /* IRTextFieldDrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRTextFieldDrag.h; sourceTree = "<group>"; };
+		DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRTextFieldDrag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DF060E8F1B0F6331003450C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DF060EA21B0F6331003450C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,7 +44,6 @@
 			isa = PBXGroup;
 			children = (
 				DF060E941B0F6331003450C5 /* IPAUploader */,
-				DF060EA81B0F6331003450C5 /* IPAUploaderTests */,
 				DF060E931B0F6331003450C5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				DF060E921B0F6331003450C5 /* IPAUploader.app */,
-				DF060EA51B0F6331003450C5 /* IPAUploaderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,10 +59,8 @@
 		DF060E941B0F6331003450C5 /* IPAUploader */ = {
 			isa = PBXGroup;
 			children = (
-				DF060E971B0F6331003450C5 /* AppDelegate.h */,
-				DF060E981B0F6331003450C5 /* AppDelegate.m */,
-				DF060E9C1B0F6331003450C5 /* Images.xcassets */,
-				DF060E9E1B0F6331003450C5 /* MainMenu.xib */,
+				DF060EBB1B0F6468003450C5 /* Helper */,
+				DF060EBA1B0F6461003450C5 /* GUI */,
 				DF060E951B0F6331003450C5 /* Supporting Files */,
 			);
 			path = IPAUploader;
@@ -94,21 +75,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DF060EA81B0F6331003450C5 /* IPAUploaderTests */ = {
+		DF060EBA1B0F6461003450C5 /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				DF060EAB1B0F6331003450C5 /* IPAUploaderTests.m */,
-				DF060EA91B0F6331003450C5 /* Supporting Files */,
+				DF060E971B0F6331003450C5 /* AppDelegate.h */,
+				DF060E981B0F6331003450C5 /* AppDelegate.m */,
+				DF060E9E1B0F6331003450C5 /* MainMenu.xib */,
+				DF060EB51B0F6400003450C5 /* ViewController.h */,
+				DF060EB61B0F6400003450C5 /* ViewController.m */,
+				DF060EB71B0F6400003450C5 /* ViewController.xib */,
 			);
-			path = IPAUploaderTests;
+			name = GUI;
 			sourceTree = "<group>";
 		};
-		DF060EA91B0F6331003450C5 /* Supporting Files */ = {
+		DF060EBB1B0F6468003450C5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				DF060EAA1B0F6331003450C5 /* Info.plist */,
+				DF060EBC1B0F6478003450C5 /* IRTextFieldDrag.h */,
+				DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */,
 			);
-			name = "Supporting Files";
+			name = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,24 +117,6 @@
 			productReference = DF060E921B0F6331003450C5 /* IPAUploader.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DF060EA41B0F6331003450C5 /* IPAUploaderTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DF060EB21B0F6331003450C5 /* Build configuration list for PBXNativeTarget "IPAUploaderTests" */;
-			buildPhases = (
-				DF060EA11B0F6331003450C5 /* Sources */,
-				DF060EA21B0F6331003450C5 /* Frameworks */,
-				DF060EA31B0F6331003450C5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DF060EA71B0F6331003450C5 /* PBXTargetDependency */,
-			);
-			name = IPAUploaderTests;
-			productName = IPAUploaderTests;
-			productReference = DF060EA51B0F6331003450C5 /* IPAUploaderTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,10 +128,6 @@
 				TargetAttributes = {
 					DF060E911B0F6331003450C5 = {
 						CreatedOnToolsVersion = 6.3.2;
-					};
-					DF060EA41B0F6331003450C5 = {
-						CreatedOnToolsVersion = 6.3.2;
-						TestTargetID = DF060E911B0F6331003450C5;
 					};
 				};
 			};
@@ -181,7 +145,6 @@
 			projectRoot = "";
 			targets = (
 				DF060E911B0F6331003450C5 /* IPAUploader */,
-				DF060EA41B0F6331003450C5 /* IPAUploaderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -191,15 +154,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF060E9D1B0F6331003450C5 /* Images.xcassets in Resources */,
+				DF060EB91B0F6400003450C5 /* ViewController.xib in Resources */,
 				DF060EA01B0F6331003450C5 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DF060EA31B0F6331003450C5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,28 +166,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
 				DF060E9B1B0F6331003450C5 /* main.m in Sources */,
+				DF060EBE1B0F6478003450C5 /* IRTextFieldDrag.m in Sources */,
 				DF060E991B0F6331003450C5 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DF060EA11B0F6331003450C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DF060EAC1B0F6331003450C5 /* IPAUploaderTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DF060EA71B0F6331003450C5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DF060E911B0F6331003450C5 /* IPAUploader */;
-			targetProxy = DF060EA61B0F6331003450C5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DF060E9E1B0F6331003450C5 /* MainMenu.xib */ = {
@@ -331,6 +273,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = IPAUploader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -342,43 +285,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = IPAUploader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		DF060EB31B0F6331003450C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = IPAUploaderTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPAUploader.app/Contents/MacOS/IPAUploader";
-			};
-			name = Debug;
-		};
-		DF060EB41B0F6331003450C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = IPAUploaderTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IPAUploader.app/Contents/MacOS/IPAUploader";
 			};
 			name = Release;
 		};
@@ -399,14 +307,6 @@
 			buildConfigurations = (
 				DF060EB01B0F6331003450C5 /* Debug */,
 				DF060EB11B0F6331003450C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		DF060EB21B0F6331003450C5 /* Build configuration list for PBXNativeTarget "IPAUploaderTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DF060EB31B0F6331003450C5 /* Debug */,
-				DF060EB41B0F6331003450C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
