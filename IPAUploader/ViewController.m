@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
+#import "Client.h"
 
 @interface ViewController ()
 
@@ -54,6 +55,11 @@
 - (IBAction)upload:(id)sender
 {
     [self.progressBar startAnimation:nil];
+    
+    [Client getWithBlock:^(id response, NSError *error) {
+        //
+    }];
+    
 }
 
 @end
