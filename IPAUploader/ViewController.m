@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "AppDelegate.h"
-#import "Client.h"
+#import "BITHockeyManager.h"
 
 @interface ViewController ()
 
@@ -56,10 +56,10 @@
 {
     [self.progressBar startAnimation:nil];
     
-    [Client getWithBlock:^(id response, NSError *error) {
-        //
+    NSDictionary *headers = @{@"X-HockeyAppToken" : @"769d1e8f260e48b8a3972f803f14842f"};
+    [BITHockeyManager get:@"https://rink.hockeyapp.net/api/2/apps" headers:headers parameters:nil withBlock:^(id response, NSError *error) {
+        NSLog(@"response %@", response);
     }];
-    
 }
 
 @end

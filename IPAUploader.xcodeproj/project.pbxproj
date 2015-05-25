@@ -25,7 +25,9 @@
 		DF060EFA1B0F6919003450C5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF060EF91B0F6919003450C5 /* Security.framework */; };
 		DF060EFC1B0F6922003450C5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF060EFB1B0F6922003450C5 /* SystemConfiguration.framework */; };
 		DF060EFE1B0F6929003450C5 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF060EFD1B0F6929003450C5 /* CoreServices.framework */; };
-		DF060F011B0F6A32003450C5 /* Client.m in Sources */ = {isa = PBXBuildFile; fileRef = DF060F001B0F6A32003450C5 /* Client.m */; };
+		DF0ACAE11B1330CB000B6558 /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADC1B1330CB000B6558 /* BITHockeyAppClient.m */; };
+		DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */; };
+		DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,8 +64,12 @@
 		DF060EF91B0F6919003450C5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DF060EFB1B0F6922003450C5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		DF060EFD1B0F6929003450C5 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
-		DF060EFF1B0F6A32003450C5 /* Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Client.h; sourceTree = "<group>"; };
-		DF060F001B0F6A32003450C5 /* Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Client.m; sourceTree = "<group>"; };
+		DF0ACADB1B1330CB000B6558 /* BITHockeyAppClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppClient.h; sourceTree = "<group>"; };
+		DF0ACADC1B1330CB000B6558 /* BITHockeyAppClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppClient.m; sourceTree = "<group>"; };
+		DF0ACADD1B1330CB000B6558 /* BITHTTPOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHTTPOperation.h; sourceTree = "<group>"; };
+		DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
+		DF0ACADF1B1330CB000B6558 /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
+		DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +105,7 @@
 		DF060E941B0F6331003450C5 /* IPAUploader */ = {
 			isa = PBXGroup;
 			children = (
+				DF0ACADA1B1330CB000B6558 /* HockeySDK */,
 				DF060EDC1B0F68BE003450C5 /* AFNetworking */,
 				DF060EBB1B0F6468003450C5 /* Helper */,
 				DF060EBA1B0F6461003450C5 /* GUI */,
@@ -137,8 +144,6 @@
 			children = (
 				DF060EBC1B0F6478003450C5 /* IRTextFieldDrag.h */,
 				DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */,
-				DF060EFF1B0F6A32003450C5 /* Client.h */,
-				DF060F001B0F6A32003450C5 /* Client.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -167,6 +172,19 @@
 				DF060EEF1B0F68BE003450C5 /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		DF0ACADA1B1330CB000B6558 /* HockeySDK */ = {
+			isa = PBXGroup;
+			children = (
+				DF0ACADB1B1330CB000B6558 /* BITHockeyAppClient.h */,
+				DF0ACADC1B1330CB000B6558 /* BITHockeyAppClient.m */,
+				DF0ACADD1B1330CB000B6558 /* BITHTTPOperation.h */,
+				DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */,
+				DF0ACADF1B1330CB000B6558 /* BITHockeyManager.h */,
+				DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */,
+			);
+			path = HockeySDK;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,13 +258,15 @@
 			files = (
 				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
 				DF060EF41B0F68BE003450C5 /* AFSecurityPolicy.m in Sources */,
+				DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */,
 				DF060E9B1B0F6331003450C5 /* main.m in Sources */,
+				DF0ACAE11B1330CB000B6558 /* BITHockeyAppClient.m in Sources */,
 				DF060EF11B0F68BE003450C5 /* AFHTTPRequestOperationManager.m in Sources */,
 				DF060EF51B0F68BE003450C5 /* AFURLConnectionOperation.m in Sources */,
 				DF060EF01B0F68BE003450C5 /* AFHTTPRequestOperation.m in Sources */,
-				DF060F011B0F6A32003450C5 /* Client.m in Sources */,
 				DF060EBE1B0F6478003450C5 /* IRTextFieldDrag.m in Sources */,
 				DF060EF61B0F68BE003450C5 /* AFURLRequestSerialization.m in Sources */,
+				DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */,
 				DF060EF21B0F68BE003450C5 /* AFHTTPSessionManager.m in Sources */,
 				DF060EF31B0F68BE003450C5 /* AFNetworkReachabilityManager.m in Sources */,
 				DF060EF71B0F68BE003450C5 /* AFURLResponseSerialization.m in Sources */,
@@ -353,6 +373,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IPAUploader",
+				);
 				INFOPLIST_FILE = IPAUploader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -365,6 +389,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/IPAUploader",
+				);
 				INFOPLIST_FILE = IPAUploader/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
@@ -391,6 +419,7 @@
 				DF060EB11B0F6331003450C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

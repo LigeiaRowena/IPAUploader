@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BITHockeyManager.h"
 
 @interface AppDelegate ()
 
@@ -15,6 +16,13 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    
+    // app id taken from the App detail in hockeyapp
+    // ex: Speedy W-BE
+    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[[BITHockeyManager sharedHockeyManager] getAppIdentifier]];
+    [[BITHockeyManager sharedHockeyManager] startManager];
+    
+    [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
     // add a contentView
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
