@@ -10,9 +10,19 @@
 #import "BITHockeyAppClient.h"
 
 NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
+
+// app id taken from the App detail in hockeyapp
+// ex: Speedy W-BE
 NSString *const kAppIdentifier = @"88b71a2d4a9e637ba858d1636475a438";
+
+// token for the hockeyapp account
 NSString *const kAppToken = @"769d1e8f260e48b8a3972f803f14842f";
+
+// url to get infos about all the apps
 NSString *const kAppsUrl = @"https://rink.hockeyapp.net/api/2/apps";
+
+// url to make a POST request to upload an app
+NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 
 
 #define BITHOCKEY_INTEGRATIONFLOW_TIMESTAMP @"BITIntegrationFlowStartTimestamp"
@@ -192,6 +202,33 @@ NSString *const kAppsUrl = @"https://rink.hockeyapp.net/api/2/apps";
     }];
 }
 
+// upload an app to an existing one or a new app
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath withBlock:(void (^)(id response, NSError *error))block
+{
+    NSRange range = [ipaPath rangeOfString:@"/" options:NSBackwardsSearch];
+    NSString *fileName = [ipaPath substringFromIndex:range.location+1];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:ipaPath]];
+    NSDictionary *headers = @{@"X-HockeyAppToken" : kAppToken};
+    AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
+    NSURLSessionDataTask *datatask = [session POST:kUploadAppUrl headers:headers parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data name:@"ipa" fileName:fileName mimeType:@"application/octet-stream ipa"];
+        [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding] name:@"status"];
+        [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"notify"];
+        [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"release_type"];
+
+
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (block)
+            block(responseObject, nil);
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block)
+            block(nil, error);
+    }];
+    
+    return datatask;
+}
+
 + (NSURLSessionDataTask *)get:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block
 {
     //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
@@ -209,10 +246,11 @@ NSString *const kAppsUrl = @"https://rink.hockeyapp.net/api/2/apps";
 }
 
 
-+ (NSURLSessionDataTask *)postWithBlock:(void (^)(id response, NSError *error))block
++ (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block
 {
-    AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
-    NSURLSessionDataTask *datatask = [session POST:@"" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
+    AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
+    NSURLSessionDataTask *datatask = [session POST:url headers:headers parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         //
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         if (block)

@@ -56,9 +56,19 @@
 {
     [self.progressBar startAnimation:nil];
     
+    
+    /*
     NSDictionary *headers = @{@"X-HockeyAppToken" : @"769d1e8f260e48b8a3972f803f14842f"};
     [BITHockeyManager get:@"https://rink.hockeyapp.net/api/2/apps" headers:headers parameters:nil withBlock:^(id response, NSError *error) {
         NSLog(@"response %@", response);
+    }];
+     */
+    
+    
+    
+    [BITHockeyManager uploadApp:self.ipaField.stringValue withBlock:^(id response, NSError *error) {
+        NSLog(@"---uploadApp %@", response);
+        [self.progressBar stopAnimation:nil];
     }];
 }
 

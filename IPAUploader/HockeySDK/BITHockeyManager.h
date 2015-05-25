@@ -18,8 +18,9 @@
 - (NSString*)getAppIdentifier;
 
 + (NSURLSessionDataTask *)get:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block;
-+ (NSURLSessionDataTask *)postWithBlock:(void (^)(id response, NSError *error))block;
++ (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block;
 
 + (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block;
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath withBlock:(void (^)(id response, NSError *error))block;
 
 @end

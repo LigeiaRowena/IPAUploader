@@ -146,6 +146,7 @@
 }
 
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
+                       headers:(NSDictionary*)headers
                     parameters:(id)parameters
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
@@ -153,6 +154,16 @@
 {
     NSError *serializationError = nil;
     NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
+    
+    // setting headers
+    if (headers)
+    {
+        for (NSString *key in [headers allKeys])
+        {
+            [request setValue:headers[key] forHTTPHeaderField:key];
+        }
+    }
+
     if (serializationError) {
         if (failure) {
 #pragma clang diagnostic push
