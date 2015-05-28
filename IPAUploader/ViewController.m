@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import "BITHockeyManager.h"
+#import "NSScrollView+MultiLine.h"
 
 @interface ViewController ()
 
@@ -65,8 +66,7 @@
      */
     
     
-    
-    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:@"some notes" withBlock:^(id response, NSError *error) {
+    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] withBlock:^(id response, NSError *error) {
         NSLog(@"---uploadApp %@", response);
         if (!response || error)
             [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];

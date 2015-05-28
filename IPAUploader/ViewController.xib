@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="ipaField" destination="7V2-SI-PNm" id="yey-77-Wt8"/>
                 <outlet property="progressBar" destination="NhJ-7x-4TD" id="Ie4-vY-EEk"/>
+                <outlet property="releaseNotes" destination="uI2-Pr-ypB" id="8PM-Ec-ELg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -18,8 +19,9 @@
             <rect key="frame" x="0.0" y="0.0" width="770" height="320"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gtY-tX-Pjz">
+                <button verticalHuggingPriority="750" id="gtY-tX-Pjz">
                     <rect key="frame" x="7" y="272" width="218" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Choose the ipa file to upload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efa-Z4-sH3">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -28,8 +30,9 @@
                         <action selector="browseIPAFile:" target="-2" id="oBO-15-ajP"/>
                     </connections>
                 </button>
-                <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7V2-SI-PNm" customClass="IRTextFieldDrag">
-                    <rect key="frame" x="267" y="278" width="458" height="22"/>
+                <textField verticalHuggingPriority="750" id="7V2-SI-PNm" customClass="IRTextFieldDrag">
+                    <rect key="frame" x="295" y="278" width="458" height="22"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Drag &amp; drop the ipa file" drawsBackground="YES" id="fH5-Du-iVC">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -39,9 +42,10 @@
                         <outlet property="dragDelegate" destination="-2" id="P0k-3n-vfa"/>
                     </connections>
                 </textField>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="S5H-AG-BrR">
-                    <rect key="frame" x="230" y="5" width="95" height="32"/>
-                    <buttonCell key="cell" type="push" title="UPLOAD" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTU-sx-CdC">
+                <button verticalHuggingPriority="750" id="S5H-AG-BrR">
+                    <rect key="frame" x="284" y="3" width="203" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="UPLOAD TO HOCKEYAPP" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTU-sx-CdC">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
@@ -49,11 +53,41 @@
                         <action selector="upload:" target="-2" id="5xn-ud-0tv"/>
                     </connections>
                 </button>
-                <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="NhJ-7x-4TD">
-                    <rect key="frame" x="381" y="6" width="32" height="32"/>
+                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" id="uI2-Pr-ypB">
+                    <rect key="frame" x="13" y="117" width="740" height="142"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <clipView key="contentView" id="Lb7-DE-MWq">
+                        <rect key="frame" x="0.0" y="0.0" width="725" height="142"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView editable="NO" importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="Rdq-e7-Y0j">
+                                <rect key="frame" x="0.0" y="0.0" width="725" height="142"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <size key="minSize" width="725" height="142"/>
+                                <size key="maxSize" width="731" height="10000000"/>
+                                <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                <size key="minSize" width="725" height="142"/>
+                                <size key="maxSize" width="731" height="10000000"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </clipView>
+                    <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="YrZ-0t-J54">
+                        <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="49F-T8-Rhj">
+                        <rect key="frame" x="224" y="1" width="15" height="133"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
+                <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" id="NhJ-7x-4TD">
+                    <rect key="frame" x="369" y="51" width="32" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </progressIndicator>
             </subviews>
-            <point key="canvasLocation" x="451.5" y="469.5"/>
+            <point key="canvasLocation" x="451" y="469"/>
         </customView>
     </objects>
 </document>

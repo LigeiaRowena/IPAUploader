@@ -214,6 +214,30 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     NSData *data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:ipaPath]];
     
     NSDictionary *headers = @{kAppTokenKey : kAppToken};
+    return [self post:ipaPath headers:headers parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:data name:@"ipa" fileName:fileName mimeType:@"application/octet-stream ipa"];
+        [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding] name:@"status"];
+        [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"notify"];
+        [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"release_type"];
+        if (releaseNotes)
+        {
+            [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"notes_type"];
+            [formData appendPartWithFormData:[releaseNotes dataUsingEncoding:NSUTF8StringEncoding] name:@"notes"];
+        }
+
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (block)
+            block(responseObject, nil);
+
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        if (block)
+            block(nil, error);
+    }];
+    
+    /*
+    
+    NSDictionary *headers = @{kAppTokenKey : kAppToken};
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session POST:kUploadAppUrl headers:headers parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"ipa" fileName:fileName mimeType:@"application/octet-stream ipa"];
@@ -237,6 +261,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     }];
     
     return datatask;
+     */
 }
 
 #pragma mark - Generic requests
@@ -258,19 +283,21 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 }
 
 
-+ (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block
++ (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
     //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session POST:url headers:headers parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-        //
-    } success:^(NSURLSessionDataTask *task, id responseObject) {
         if (block)
-            block(responseObject, nil);
+            block(formData);
+        
+    } success:^(NSURLSessionDataTask *task, id responseObject) {
+        if (success)
+            success(task, responseObject);
         
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        if (block)
-            block(nil, error);
+        if (failure)
+            failure(task, error);
     }];
     
     return datatask;

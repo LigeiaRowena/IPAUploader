@@ -28,6 +28,7 @@
 		DF0ACAE11B1330CB000B6558 /* BITHockeyAppClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADC1B1330CB000B6558 /* BITHockeyAppClient.m */; };
 		DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */; };
 		DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */; };
+		DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +71,8 @@
 		DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHTTPOperation.m; sourceTree = "<group>"; };
 		DF0ACADF1B1330CB000B6558 /* BITHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyManager.h; sourceTree = "<group>"; };
 		DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
+		DF2054071B176976007258F8 /* NSScrollView+MultiLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+MultiLine.h"; sourceTree = "<group>"; };
+		DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+MultiLine.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +145,8 @@
 		DF060EBB1B0F6468003450C5 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				DF2054071B176976007258F8 /* NSScrollView+MultiLine.h */,
+				DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */,
 				DF060EBC1B0F6478003450C5 /* IRTextFieldDrag.h */,
 				DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */,
 			);
@@ -265,6 +270,7 @@
 				DF060EF51B0F68BE003450C5 /* AFURLConnectionOperation.m in Sources */,
 				DF060EF01B0F68BE003450C5 /* AFHTTPRequestOperation.m in Sources */,
 				DF060EBE1B0F6478003450C5 /* IRTextFieldDrag.m in Sources */,
+				DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */,
 				DF060EF61B0F68BE003450C5 /* AFURLRequestSerialization.m in Sources */,
 				DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */,
 				DF060EF21B0F68BE003450C5 /* AFHTTPSessionManager.m in Sources */,
