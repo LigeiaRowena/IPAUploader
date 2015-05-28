@@ -26,7 +26,7 @@
 
 - (void)performDragOperation:(NSString*)text
 {
-    
+    [self.ipaField setStringValue:text];
 }
 
 #pragma mark - Actions
@@ -66,10 +66,28 @@
     
     
     
-    [BITHockeyManager uploadApp:self.ipaField.stringValue withBlock:^(id response, NSError *error) {
+    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:@"some notes" withBlock:^(id response, NSError *error) {
         NSLog(@"---uploadApp %@", response);
+        if (!response || error)
+            [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];
+        else
+            [self showAlertOfKind:NSInformationalAlertStyle WithTitle:@"Information" AndMessage:@"The upload of the file you selected finished successfully"];
         [self.progressBar stopAnimation:nil];
     }];
 }
+
+#pragma mark - Alert Methods
+
+- (void)showAlertOfKind:(NSAlertStyle)style WithTitle:(NSString *)title AndMessage:(NSString *)message
+{
+    // Show a critical alert
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert addButtonWithTitle:@"OK"];
+    [alert setMessageText:title];
+    [alert setInformativeText:message];
+    [alert setAlertStyle:style];
+    [alert runModal];
+}
+
 
 @end

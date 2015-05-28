@@ -19,9 +19,8 @@
     
     // app id taken from the App detail in hockeyapp
     // ex: Speedy W-BE
-    [[BITHockeyManager sharedHockeyManager] configureWithIdentifier:[[BITHockeyManager sharedHockeyManager] getAppIdentifier]];
+    [[BITHockeyManager sharedHockeyManager] configureWithAppIdentifier];
     [[BITHockeyManager sharedHockeyManager] startManager];
-    
     [[BITHockeyManager sharedHockeyManager] testIdentifier];
     
     // add a contentView

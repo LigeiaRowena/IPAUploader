@@ -11,16 +11,21 @@
 
 @interface BITHockeyManager : NSObject
 
+// Init & Utility
 + (BITHockeyManager *)sharedHockeyManager;
-- (void)configureWithIdentifier:(NSString *)_appIdentifier;
+- (void)configureWithAppIdentifier;
 - (void)startManager;
 - (void)testIdentifier;
 - (NSString*)getAppIdentifier;
 
+// HockeyApp requests
++ (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block;
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes withBlock:(void (^)(id response, NSError *error))block;
+
+// Generic requests
 + (NSURLSessionDataTask *)get:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block;
 + (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block;
 
-+ (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block;
-+ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath withBlock:(void (^)(id response, NSError *error))block;
+
 
 @end

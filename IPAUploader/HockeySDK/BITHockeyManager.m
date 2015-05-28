@@ -11,12 +11,16 @@
 
 NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 
-// app id taken from the App detail in hockeyapp
+// app id taken from the App detail in hockeyapp (only for the ping)
 // ex: Speedy W-BE
 NSString *const kAppIdentifier = @"88b71a2d4a9e637ba858d1636475a438";
 
+
 // token for the hockeyapp account
 NSString *const kAppToken = @"769d1e8f260e48b8a3972f803f14842f";
+
+// token key for the HTTPHeaderField
+NSString *const kAppTokenKey = @"X-HockeyAppToken";
 
 // url to get infos about all the apps
 NSString *const kAppsUrl = @"https://rink.hockeyapp.net/api/2/apps";
@@ -36,7 +40,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     BOOL validAppIdentifier;
 }
 
-#pragma mark - Init
+#pragma mark - Init & Utility
 
 + (BITHockeyManager *)sharedHockeyManager {
     static BITHockeyManager *sharedInstance = nil;
@@ -52,15 +56,14 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 
 - (id) init {
     if ((self = [super init])) {
-        //serverURL = nil;
         hockeyAppClient = nil;
     }
     return self;
 }
 
-- (void)configureWithIdentifier:(NSString *)_appIdentifier
+- (void)configureWithAppIdentifier
 {
-    appIdentifier = [_appIdentifier copy];
+    appIdentifier = [[self getAppIdentifier] copy];
     [self initializeModules];
 }
 
@@ -157,7 +160,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     return kAppIdentifier;
 }
 
-#pragma mark - Request
+#pragma mark - HockeyApp requests
 
 - (void)pingServerForIntegrationStartWorkflowWithTimeString:(NSString *)timeString
 {
@@ -195,7 +198,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 // get a list of all the apps with the given token
 + (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block
 {
-    NSDictionary *headers = @{@"X-HockeyAppToken" : kAppToken};
+    NSDictionary *headers = @{kAppTokenKey : kAppToken};
     return [self get:kAppsUrl headers:headers parameters:nil withBlock:^(id response, NSError *error) {
         if (block)
             block(response, error);
@@ -203,19 +206,26 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 }
 
 // upload an app to an existing one or a new app
-+ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath withBlock:(void (^)(id response, NSError *error))block
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes withBlock:(void (^)(id response, NSError *error))block
 {
+    // create multipart IPA data
     NSRange range = [ipaPath rangeOfString:@"/" options:NSBackwardsSearch];
     NSString *fileName = [ipaPath substringFromIndex:range.location+1];
     NSData *data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:ipaPath]];
-    NSDictionary *headers = @{@"X-HockeyAppToken" : kAppToken};
+    
+    NSDictionary *headers = @{kAppTokenKey : kAppToken};
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session POST:kUploadAppUrl headers:headers parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:data name:@"ipa" fileName:fileName mimeType:@"application/octet-stream ipa"];
         [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding] name:@"status"];
         [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"notify"];
         [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"release_type"];
-
+        
+        if (releaseNotes)
+        {
+            [formData appendPartWithFormData:[@"0" dataUsingEncoding:NSUTF8StringEncoding] name:@"notes_type"];
+            [formData appendPartWithFormData:[releaseNotes dataUsingEncoding:NSUTF8StringEncoding] name:@"notes"];
+        }
 
     } success:^(NSURLSessionDataTask *task, id responseObject) {
         if (block)
@@ -228,6 +238,8 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     
     return datatask;
 }
+
+#pragma mark - Generic requests
 
 + (NSURLSessionDataTask *)get:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block
 {
