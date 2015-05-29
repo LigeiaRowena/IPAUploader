@@ -13,11 +13,11 @@ NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 
 // app id taken from the App detail in hockeyapp (only for the ping)
 // ex: Speedy W-BE
-NSString *const kAppIdentifier = @"88b71a2d4a9e637ba858d1636475a438";
+NSString *const kAppIdentifier = @"995ec078810124dae72fe0d117d1be36";
 
 
 // token for the hockeyapp account
-NSString *const kAppToken = @"769d1e8f260e48b8a3972f803f14842f";
+NSString *const kAppToken = @"0fb12912ba344081b41495c0f60d66f1";
 
 // token key for the HTTPHeaderField
 NSString *const kAppTokenKey = @"X-HockeyAppToken";
@@ -234,7 +234,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
         if (block)
             block(nil, error);
         
-    }progressBlock:^(NSProgress *pr) {
+    } progressBlock:^(NSProgress *pr) {
         if (progressBlock)
             progressBlock(pr);
     }];

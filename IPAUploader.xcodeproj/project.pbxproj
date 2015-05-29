@@ -29,6 +29,8 @@
 		DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */; };
 		DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */; };
 		DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */; };
+		DFB84B301B187DFE0058E54A /* FTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B2F1B187DFE0058E54A /* FTPClient.m */; };
+		DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B321B187FDC0058E54A /* FTPManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +75,10 @@
 		DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
 		DF2054071B176976007258F8 /* NSScrollView+MultiLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+MultiLine.h"; sourceTree = "<group>"; };
 		DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+MultiLine.m"; sourceTree = "<group>"; };
+		DFB84B2E1B187DFE0058E54A /* FTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPClient.h; sourceTree = "<group>"; };
+		DFB84B2F1B187DFE0058E54A /* FTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPClient.m; sourceTree = "<group>"; };
+		DFB84B311B187FDC0058E54A /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
+		DFB84B321B187FDC0058E54A /* FTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +114,7 @@
 		DF060E941B0F6331003450C5 /* IPAUploader */ = {
 			isa = PBXGroup;
 			children = (
+				DFB84B2D1B187DF60058E54A /* FTP */,
 				DF0ACADA1B1330CB000B6558 /* HockeySDK */,
 				DF060EDC1B0F68BE003450C5 /* AFNetworking */,
 				DF060EBB1B0F6468003450C5 /* Helper */,
@@ -192,6 +199,17 @@
 			path = HockeySDK;
 			sourceTree = "<group>";
 		};
+		DFB84B2D1B187DF60058E54A /* FTP */ = {
+			isa = PBXGroup;
+			children = (
+				DFB84B311B187FDC0058E54A /* FTPManager.h */,
+				DFB84B321B187FDC0058E54A /* FTPManager.m */,
+				DFB84B2E1B187DFE0058E54A /* FTPClient.h */,
+				DFB84B2F1B187DFE0058E54A /* FTPClient.m */,
+			);
+			path = FTP;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -262,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
+				DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */,
 				DF060EF41B0F68BE003450C5 /* AFSecurityPolicy.m in Sources */,
 				DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */,
 				DF060E9B1B0F6331003450C5 /* main.m in Sources */,
@@ -275,6 +294,7 @@
 				DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */,
 				DF060EF21B0F68BE003450C5 /* AFHTTPSessionManager.m in Sources */,
 				DF060EF31B0F68BE003450C5 /* AFNetworkReachabilityManager.m in Sources */,
+				DFB84B301B187DFE0058E54A /* FTPClient.m in Sources */,
 				DF060EF71B0F68BE003450C5 /* AFURLResponseSerialization.m in Sources */,
 				DF060EF81B0F68BE003450C5 /* AFURLSessionManager.m in Sources */,
 				DF060E991B0F6331003450C5 /* AppDelegate.m in Sources */,
