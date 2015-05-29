@@ -14,5 +14,6 @@
 @property (weak) IBOutlet IRTextFieldDrag *ipaField;
 @property (weak) IBOutlet NSProgressIndicator *progressBar;
 @property (weak) IBOutlet NSScrollView *releaseNotes;
+@property (weak) IBOutlet NSTextField *progressLabel;
 
 @end

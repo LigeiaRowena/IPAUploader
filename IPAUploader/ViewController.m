@@ -57,15 +57,6 @@
 {
     [self.progressBar startAnimation:nil];
     
-    
-    /*
-    NSDictionary *headers = @{@"X-HockeyAppToken" : @"769d1e8f260e48b8a3972f803f14842f"};
-    [BITHockeyManager get:@"https://rink.hockeyapp.net/api/2/apps" headers:headers parameters:nil withBlock:^(id response, NSError *error) {
-        NSLog(@"response %@", response);
-    }];
-     */
-    
-    
     [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] withBlock:^(id response, NSError *error) {
         NSLog(@"---uploadApp %@", response);
         if (!response || error)
@@ -73,6 +64,9 @@
         else
             [self showAlertOfKind:NSInformationalAlertStyle WithTitle:@"Information" AndMessage:@"The upload of the file you selected finished successfully"];
         [self.progressBar stopAnimation:nil];
+    }progressBlock:^(NSProgress *pr) {
+        NSString *progress = [NSString stringWithFormat:@"Progress: %@ (%lli of %lli bytes)", pr.localizedDescription, pr.completedUnitCount, pr.totalUnitCount];
+        [self.progressLabel setStringValue:progress];
     }];
 }
 

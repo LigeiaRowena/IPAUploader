@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="ipaField" destination="7V2-SI-PNm" id="yey-77-Wt8"/>
                 <outlet property="progressBar" destination="NhJ-7x-4TD" id="Ie4-vY-EEk"/>
+                <outlet property="progressLabel" destination="Q6l-09-G2i" id="57R-Kc-mY0"/>
                 <outlet property="releaseNotes" destination="uI2-Pr-ypB" id="8PM-Ec-ELg"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
@@ -65,10 +66,10 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="minSize" width="725" height="142"/>
-                                <size key="maxSize" width="731" height="10000000"/>
+                                <size key="maxSize" width="740" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                 <size key="minSize" width="725" height="142"/>
-                                <size key="maxSize" width="731" height="10000000"/>
+                                <size key="maxSize" width="740" height="10000000"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -82,8 +83,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Q6l-09-G2i">
+                    <rect key="frame" x="193" y="59" width="559" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="V4A-kC-vVQ">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" id="NhJ-7x-4TD">
-                    <rect key="frame" x="369" y="51" width="32" height="32"/>
+                    <rect key="frame" x="151" y="51" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </progressIndicator>
             </subviews>

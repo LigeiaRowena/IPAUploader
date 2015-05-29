@@ -195,9 +195,11 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                        headers:(NSDictionary*)headers
                     parameters:(id)parameters
+                      progress:(NSProgress*)progress
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure;
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                 progressBlock:(void (^)(NSProgress* pr))progressBlock;
 
 /**
  Creates and runs an `NSURLSessionDataTask` with a `PUT` request.

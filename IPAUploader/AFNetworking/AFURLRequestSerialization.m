@@ -376,12 +376,13 @@ forHTTPHeaderField:(NSString *)field
                                              parameters:(NSDictionary *)parameters
                               constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
 {
-    return [self multipartFormRequestWithMethod:method URLString:URLString parameters:parameters constructingBodyWithBlock:block error:nil];
+    return [self multipartFormRequestWithMethod:method URLString:URLString parameters:parameters headers:nil constructingBodyWithBlock:block error:nil];
 }
 
 - (NSMutableURLRequest *)multipartFormRequestWithMethod:(NSString *)method
                                               URLString:(NSString *)URLString
                                              parameters:(NSDictionary *)parameters
+                                             headers:(NSDictionary *)headers
                               constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                                                   error:(NSError *__autoreleasing *)error
 {
@@ -406,6 +407,15 @@ forHTTPHeaderField:(NSString *)field
             if (data) {
                 [formData appendPartWithFormData:data name:[pair.field description]];
             }
+        }
+    }
+    
+    // setting headers
+    if (headers)
+    {
+        for (NSString *key in [headers allKeys])
+        {
+            [mutableRequest setValue:headers[key] forHTTPHeaderField:key];
         }
     }
 

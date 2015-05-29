@@ -148,12 +148,14 @@
 - (NSURLSessionDataTask *)POST:(NSString *)URLString
                        headers:(NSDictionary*)headers
                     parameters:(id)parameters
+                      progress:(NSProgress*)progress
      constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
                        success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
                        failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                 progressBlock:(void (^)(NSProgress* pr))progressBlock
 {
     NSError *serializationError = nil;
-    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters constructingBodyWithBlock:block error:&serializationError];
+    NSMutableURLRequest *request = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:URLString relativeToURL:self.baseURL] absoluteString] parameters:parameters headers:nil constructingBodyWithBlock:block error:&serializationError];
     [request setTimeoutInterval:30];
     
     // setting headers
@@ -178,18 +180,19 @@
         return nil;
     }
 
-    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:nil completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
+    __block NSURLSessionDataTask *task = [self uploadTaskWithStreamedRequest:request progress:progress completionHandler:^(NSURLResponse * __unused response, id responseObject, NSError *error) {
         if (error) {
-            if (failure) {
+            if (failure)
                 failure(task, error);
-            }
         } else {
-            if (success) {
+            if (success)
                 success(task, responseObject);
-            }
         }
+    }progressBlock:^(NSProgress *pr) {
+        if (progressBlock)
+            progressBlock(pr);
     }];
-
+    
     [task resume];
 
     return task;
