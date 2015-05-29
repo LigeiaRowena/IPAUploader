@@ -20,8 +20,33 @@
 
 #pragma mark - Init
 
-- (void)viewDidLoad {
+- (void)loadView
+{
+    [super loadView];
+    
+    // create a popover
+    CredentialViewController *credentialViewController = [[CredentialViewController alloc] initWithNibName:@"CredentialViewController" bundle:nil];
+    credentialViewController.delegate = self;
+    self.popover = [[NSPopover alloc] init];
+    self.popover.contentViewController = credentialViewController;
+}
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
+}
+
+#pragma mark - CredentialViewControllerDelegate
+
+- (void)loginFailed
+{
+    [self.popover performClose:self.loginButton];
+}
+
+- (void)loginSucceed:(NSString*)message
+{
+    [self.popover performClose:self.loginButton];
+    [self.loginStatus setStringValue:message];
 }
 
 #pragma mark - IRTextFieldDragDelegate
@@ -31,7 +56,27 @@
     [self.ipaField setStringValue:text];
 }
 
+#pragma mark - Popover Login
+
+- (void)showPopover:(id)sender
+{
+    [self.popover showRelativeToRect:self.loginButton.bounds ofView:self.loginButton preferredEdge:NSMinYEdge];
+}
+
+- (void)closePopover:(id)sender
+{
+    [self.popover performClose:sender];
+}
+
 #pragma mark - Actions
+
+- (IBAction)login:(id)sender
+{
+    if (self.popover.shown)
+        [self closePopover:sender];
+    else
+        [self showPopover:sender];
+}
 
 - (IBAction)browseIPAFile:(id)sender
 {
@@ -58,7 +103,14 @@
 {
     [self.progressBar startAnimation:nil];
     
-    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] withBlock:^(id response, NSError *error) {
+    NSString *token = [[BITHockeyManager sharedHockeyManager] getToken];
+    if (token == nil)
+    {
+        [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"You have to login to your HockeyApp account"];
+        return;
+    }
+    
+    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] token:@"" withBlock:^(id response, NSError *error) {
         NSLog(@"---uploadApp %@", response);
         if (!response || error)
             [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];

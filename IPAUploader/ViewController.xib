@@ -8,6 +8,8 @@
         <customObject id="-2" userLabel="File's Owner" customClass="ViewController">
             <connections>
                 <outlet property="ipaField" destination="7V2-SI-PNm" id="yey-77-Wt8"/>
+                <outlet property="loginButton" destination="eU1-5L-rJN" id="GjB-Hw-Rao"/>
+                <outlet property="loginStatus" destination="oNm-AW-Pwb" id="CD5-KL-j7R"/>
                 <outlet property="progressBar" destination="NhJ-7x-4TD" id="Ie4-vY-EEk"/>
                 <outlet property="progressLabel" destination="Q6l-09-G2i" id="57R-Kc-mY0"/>
                 <outlet property="releaseNotes" destination="uI2-Pr-ypB" id="8PM-Ec-ELg"/>
@@ -17,11 +19,11 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="770" height="320"/>
+            <rect key="frame" x="0.0" y="-1" width="773" height="535"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
                 <button verticalHuggingPriority="750" id="gtY-tX-Pjz">
-                    <rect key="frame" x="7" y="272" width="218" height="32"/>
+                    <rect key="frame" x="7" y="367" width="218" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <buttonCell key="cell" type="push" title="Choose the ipa file to upload" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="efa-Z4-sH3">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -32,7 +34,7 @@
                     </connections>
                 </button>
                 <textField verticalHuggingPriority="750" id="7V2-SI-PNm" customClass="IRTextFieldDrag">
-                    <rect key="frame" x="295" y="278" width="458" height="22"/>
+                    <rect key="frame" x="295" y="373" width="458" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Drag &amp; drop the ipa file" drawsBackground="YES" id="fH5-Du-iVC">
                         <font key="font" metaFont="system"/>
@@ -43,19 +45,8 @@
                         <outlet property="dragDelegate" destination="-2" id="P0k-3n-vfa"/>
                     </connections>
                 </textField>
-                <button verticalHuggingPriority="750" id="S5H-AG-BrR">
-                    <rect key="frame" x="156" y="3" width="203" height="32"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="UPLOAD TO HOCKEYAPP" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTU-sx-CdC">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="system"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="uploadHockeyApp:" target="-2" id="EcK-e5-frB"/>
-                    </connections>
-                </button>
                 <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" verticalScrollElasticity="allowed" id="uI2-Pr-ypB">
-                    <rect key="frame" x="13" y="117" width="740" height="142"/>
+                    <rect key="frame" x="13" y="177" width="740" height="142"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <clipView key="contentView" id="Lb7-DE-MWq">
                         <rect key="frame" x="0.0" y="0.0" width="725" height="142"/>
@@ -84,11 +75,11 @@
                     </scroller>
                 </scrollView>
                 <progressIndicator maxValue="100" displayedWhenStopped="NO" indeterminate="YES" style="spinning" id="NhJ-7x-4TD">
-                    <rect key="frame" x="151" y="51" width="32" height="32"/>
+                    <rect key="frame" x="370" y="49" width="32" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                 </progressIndicator>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="Q6l-09-G2i">
-                    <rect key="frame" x="193" y="59" width="559" height="17"/>
+                    <rect key="frame" x="107" y="93" width="559" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" id="V4A-kC-vVQ">
                         <font key="font" metaFont="system"/>
@@ -96,19 +87,39 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button verticalHuggingPriority="750" id="cZt-51-RU6">
-                    <rect key="frame" x="408" y="3" width="203" height="32"/>
+                <button verticalHuggingPriority="750" id="S5H-AG-BrR">
+                    <rect key="frame" x="285" y="13" width="203" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="push" title="UPLOAD TO FTP" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Tfr-xO-pGn">
+                    <buttonCell key="cell" type="push" title="UPLOAD TO HOCKEYAPP" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="kTU-sx-CdC">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="uploadFTP:" target="-2" id="fGL-so-ym9"/>
+                        <action selector="uploadHockeyApp:" target="-2" id="EcK-e5-frB"/>
                     </connections>
                 </button>
+                <button verticalHuggingPriority="750" id="eU1-5L-rJN">
+                    <rect key="frame" x="7" y="478" width="251" height="32"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="push" title="Login to your HockeyApp account" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WUi-Gs-E3P">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="login:" target="-2" id="bT9-aW-X7F"/>
+                    </connections>
+                </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="oNm-AW-Pwb">
+                    <rect key="frame" x="298" y="485" width="457" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Please login..." id="jwd-J2-8Mt">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <point key="canvasLocation" x="451" y="469"/>
+            <point key="canvasLocation" x="452.5" y="576.5"/>
         </customView>
     </objects>
 </document>

@@ -17,10 +17,13 @@
 - (void)startManager;
 - (void)testIdentifier;
 - (NSString*)getAppIdentifier;
+- (void)setToken:(NSString*)_token;
+- (NSString*)getToken;
 
 // HockeyApp requests
-+ (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block;
-+ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes withBlock:(void (^)(id response, NSError *error))block progressBlock:(void (^)(NSProgress *pr))progressBlock;
++ (NSURLSessionDataTask *)getAllAppsWithToken:(NSString*)_token block:(void (^)(id response, NSError *error))block;
++ (NSURLSessionDataTask *)loginWithEmail:(NSString*)email password:(NSString*)password block:(void (^)(id response, NSError *error))block;
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes token:(NSString*)_token withBlock:(void (^)(id response, NSError *error))block progressBlock:(void (^)(NSProgress *pr))progressBlock;
 
 
 @end

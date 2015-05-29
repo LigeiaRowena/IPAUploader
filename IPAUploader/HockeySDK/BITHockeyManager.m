@@ -9,6 +9,8 @@
 #import "BITHockeyManager.h"
 #import "BITHockeyAppClient.h"
 
+static char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
 NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 
 // app id taken from the App detail in hockeyapp (only for the ping)
@@ -17,7 +19,7 @@ NSString *const kAppIdentifier = @"995ec078810124dae72fe0d117d1be36";
 
 
 // token for the hockeyapp account
-NSString *const kAppToken = @"0fb12912ba344081b41495c0f60d66f1";
+//NSString *const kAppToken = @"0fb12912ba344081b41495c0f60d66f1";
 
 // token key for the HTTPHeaderField
 NSString *const kAppTokenKey = @"X-HockeyAppToken";
@@ -27,6 +29,9 @@ NSString *const kAppsUrl = @"https://rink.hockeyapp.net/api/2/apps";
 
 // url to make a POST request to upload an app
 NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
+
+// url to make the auth and get the token
+NSString *const kAuthUrl = @"https://rink.hockeyapp.net/api/2/auth_tokens";
 
 
 #define BITHOCKEY_INTEGRATIONFLOW_TIMESTAMP @"BITIntegrationFlowStartTimestamp"
@@ -38,6 +43,7 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     BITHockeyAppClient *hockeyAppClient;
     NSString *appIdentifier;
     BOOL validAppIdentifier;
+    NSString *token;
 }
 
 #pragma mark - Init & Utility
@@ -160,6 +166,16 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
     return kAppIdentifier;
 }
 
+- (void)setToken:(NSString*)_token
+{
+    token = _token;
+}
+
+- (NSString*)getToken
+{
+    return token;
+}
+
 #pragma mark - HockeyApp requests
 
 - (void)pingServerForIntegrationStartWorkflowWithTimeString:(NSString *)timeString
@@ -196,23 +212,74 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 }
 
 // get a list of all the apps with the given token
-+ (NSURLSessionDataTask *)getAllAppsWithBlock:(void (^)(id response, NSError *error))block
++ (NSURLSessionDataTask *)getAllAppsWithToken:(NSString*)_token block:(void (^)(id response, NSError *error))block
 {
-    NSDictionary *headers = @{kAppTokenKey : kAppToken};
+    NSDictionary *headers = @{kAppTokenKey : _token};
     return [self get:kAppsUrl headers:headers parameters:nil withBlock:^(id response, NSError *error) {
         if (block)
             block(response, error);
     }];
 }
 
+// login with email and password in order to get a token
++ (NSURLSessionDataTask *)loginWithEmail:(NSString*)email password:(NSString*)password block:(void (^)(id response, NSError *error))block
+{
+    // encoding credentials
+    NSString *loginString = [@"" stringByAppendingFormat:@"%@:%@", email, password];
+    NSString *encodedLoginData = [BITHockeyManager encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];
+    NSString *authHeader = [@"Basic " stringByAppendingFormat:@"%@", encodedLoginData];
+    NSDictionary *headers = @{@"Authorization" : authHeader};
+
+    return [self get:kAuthUrl headers:headers parameters:nil withBlock:^(id response, NSError *error) {
+        if (block)
+            block(response, error);
+    }];
+}
+
++ (NSString *)encode:(NSData *)plainText {
+    int encodedLength = (4 * (([plainText length] / 3) + (1 - (3 - ([plainText length] % 3)) / 3))) + 1;
+    unsigned char *outputBuffer = malloc(encodedLength);
+    unsigned char *inputBuffer = (unsigned char *)[plainText bytes];
+    
+    NSInteger i;
+    NSInteger j = 0;
+    int remain;
+    
+    for(i = 0; i < [plainText length]; i += 3) {
+        remain = [plainText length] - i;
+        
+        outputBuffer[j++] = alphabet[(inputBuffer[i] & 0xFC) >> 2];
+        outputBuffer[j++] = alphabet[((inputBuffer[i] & 0x03) << 4) |
+                                     ((remain > 1) ? ((inputBuffer[i + 1] & 0xF0) >> 4): 0)];
+        
+        if(remain > 1)
+            outputBuffer[j++] = alphabet[((inputBuffer[i + 1] & 0x0F) << 2)
+                                         | ((remain > 2) ? ((inputBuffer[i + 2] & 0xC0) >> 6) : 0)];
+        else
+            outputBuffer[j++] = '=';
+        
+        if(remain > 2)
+            outputBuffer[j++] = alphabet[inputBuffer[i + 2] & 0x3F];
+        else
+            outputBuffer[j++] = '=';
+    }
+    
+    outputBuffer[j] = 0;
+    
+    NSString *result = [NSString stringWithCString:outputBuffer length:strlen(outputBuffer)];
+    free(outputBuffer);
+    
+    return result;
+}
+
 // upload an app to an existing one or a new app
-+ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes withBlock:(void (^)(id response, NSError *error))block progressBlock:(void (^)(NSProgress *pr))progressBlock
++ (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes token:(NSString*)_token withBlock:(void (^)(id response, NSError *error))block progressBlock:(void (^)(NSProgress *pr))progressBlock
 {
     // create multipart IPA data
     NSRange range = [ipaPath rangeOfString:@"/" options:NSBackwardsSearch];
     NSString *fileName = [ipaPath substringFromIndex:range.location+1];
     NSData *data = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:ipaPath]];
-    NSDictionary *headers = @{kAppTokenKey : kAppToken};
+    NSDictionary *headers = @{kAppTokenKey : _token};
     
     NSProgress *progress = [NSProgress progressWithTotalUnitCount:data.length];
     return [self post:kUploadAppUrl headers:headers parameters:nil progress:progress constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
@@ -244,7 +311,6 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 
 + (NSURLSessionDataTask *)get:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters withBlock:(void (^)(id response, NSError *error))block
 {
-    //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session GET:url headers:headers parameters:parameters success:^(NSURLSessionDataTask *task, id responseObject) {
         if (block)
@@ -260,7 +326,6 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 
 + (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters progress:(NSProgress*)progress constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure progressBlock:(void (^)(NSProgress* pr))progressBlock
 {
-    //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session POST:url headers:headers parameters:parameters progress:progress constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if (block)
@@ -285,7 +350,6 @@ NSString *const kUploadAppUrl = @"https://rink.hockeyapp.net/api/2/apps/upload";
 
 + (NSURLSessionDataTask *)post:(NSString*)url headers:(NSDictionary*)headers parameters:(NSDictionary*)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block success:(void (^)(NSURLSessionDataTask *task, id responseObject))success failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
 {
-    //AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"rink.hockeyapp.net"]];
     AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc] init];
     NSURLSessionDataTask *datatask = [session POST:url headers:headers parameters:parameters progress:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         if (block)

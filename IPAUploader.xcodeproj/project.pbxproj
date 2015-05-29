@@ -29,6 +29,8 @@
 		DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */; };
 		DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */; };
 		DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */; };
+		DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */; };
+		DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */; };
 		DFB84B301B187DFE0058E54A /* FTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B2F1B187DFE0058E54A /* FTPClient.m */; };
 		DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B321B187FDC0058E54A /* FTPManager.m */; };
 /* End PBXBuildFile section */
@@ -75,6 +77,9 @@
 		DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyManager.m; sourceTree = "<group>"; };
 		DF2054071B176976007258F8 /* NSScrollView+MultiLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+MultiLine.h"; sourceTree = "<group>"; };
 		DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+MultiLine.m"; sourceTree = "<group>"; };
+		DF21BFC01B18A9DC00EB4751 /* CredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialViewController.h; sourceTree = "<group>"; };
+		DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialViewController.m; sourceTree = "<group>"; };
+		DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CredentialViewController.xib; sourceTree = "<group>"; };
 		DFB84B2E1B187DFE0058E54A /* FTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPClient.h; sourceTree = "<group>"; };
 		DFB84B2F1B187DFE0058E54A /* FTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPClient.m; sourceTree = "<group>"; };
 		DFB84B311B187FDC0058E54A /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
@@ -145,6 +150,9 @@
 				DF060EB51B0F6400003450C5 /* ViewController.h */,
 				DF060EB61B0F6400003450C5 /* ViewController.m */,
 				DF060EB71B0F6400003450C5 /* ViewController.xib */,
+				DF21BFC01B18A9DC00EB4751 /* CredentialViewController.h */,
+				DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */,
+				DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -269,6 +277,7 @@
 			files = (
 				DF060EB91B0F6400003450C5 /* ViewController.xib in Resources */,
 				DF060EA01B0F6331003450C5 /* MainMenu.xib in Resources */,
+				DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +291,7 @@
 				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
 				DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */,
 				DF060EF41B0F68BE003450C5 /* AFSecurityPolicy.m in Sources */,
+				DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */,
 				DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */,
 				DF060E9B1B0F6331003450C5 /* main.m in Sources */,
 				DF0ACAE11B1330CB000B6558 /* BITHockeyAppClient.m in Sources */,
