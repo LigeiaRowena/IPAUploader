@@ -19,9 +19,10 @@
 {
     [super viewDidLoad];
     
-#warning test
+/*
     self.username.stringValue = @"francesca.corsini@wuerth-phoenix.com";
     self.password.stringValue = @"Objectivec9";
+ */
 }
 
 - (IBAction)login:(id)sender
