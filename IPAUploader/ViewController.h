@@ -10,7 +10,7 @@
 #import "IRTextFieldDrag.h"
 #import "CredentialViewController.h"
 
-@interface ViewController : NSViewController <IRTextFieldDragDelegate, CredentialViewControllerDelegate>
+@interface ViewController : NSViewController <IRTextFieldDragDelegate, CredentialViewControllerDelegate, NSPopoverDelegate>
 
 @property (weak) IBOutlet IRTextFieldDrag *ipaField;
 @property (weak) IBOutlet NSProgressIndicator *progressBar;

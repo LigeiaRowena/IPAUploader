@@ -8,6 +8,7 @@
 
 #import "CredentialViewController.h"
 #import "BITHockeyManager.h"
+#import "SettingsHandler.h"
 
 @interface CredentialViewController ()
 
@@ -15,36 +16,94 @@
 
 @implementation CredentialViewController
 
+#pragma mark - Init
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+}
+
+- (void)setupUI
+{
+    //detect if the app has to remember credentials
+    if ([SettingsHandler rememberCredentials])
+    {
+        self.username.stringValue = [SettingsHandler getUsername];
+        self.password.stringValue = [SettingsHandler getPassword];
+        self.rememberButton.state = NSOnState;
+    }
+    else
+    {
+        self.username.stringValue = @"";
+        self.password.stringValue = @"";
+        self.rememberButton.state = NSOffState;
+    }
+}
+
+#pragma mark - Actions
+
+- (IBAction)tapRememberButton:(id)sender
+{
+    // remember credentials ON
+    if (self.rememberButton.state == NSOnState)
+    {
+        [SettingsHandler setRememberCredentials:YES];
+    }
     
-/*
-    self.username.stringValue = @"francesca.corsini@wuerth-phoenix.com";
-    self.password.stringValue = @"Objectivec9";
- */
+    // remember credentials OFF
+    else if (self.rememberButton.state == NSOffState)
+    {
+        [SettingsHandler setRememberCredentials:NO];
+    }
 }
 
 - (IBAction)login:(id)sender
 {
+    [self.progress startAnimation:nil];
+
     if (self.username != nil && self.password != nil)
     {
         [BITHockeyManager loginWithEmail:self.username.stringValue password:self.password.stringValue block:^(id response, NSError *error) {
-            NSString *token = response[@"tokens"][0][@"token"];
-            [[BITHockeyManager sharedHockeyManager] setToken:token];
-            
-            if (self.delegate != nil && [self.delegate respondsToSelector:@selector(loginSucceed:)])
-                [self.delegate loginSucceed:[NSString stringWithFormat:@"Login successfully with email: %@", self.username.stringValue]];
+            if (error == nil && response != nil)
+            {
+                NSString *token = response[@"tokens"][0][@"token"];
+                [[BITHockeyManager sharedHockeyManager] setToken:token];
+                if (self.delegate != nil && [self.delegate respondsToSelector:@selector(loginSucceed:)])
+                    [self.delegate loginSucceed:[NSString stringWithFormat:@"Login successfully with email: %@\n Token: %@", self.username.stringValue, token]];
+                
+                if ([SettingsHandler rememberCredentials])
+                {
+                    [SettingsHandler setUsername:self.username.stringValue];
+                    [SettingsHandler setPassword:self.password.stringValue];
+                    [SettingsHandler setToken:token];
+                }
+            }
+            else
+            {
+                [self.username setStringValue:@""];
+                [self.password setStringValue:@""];
+                [SettingsHandler setUsername:self.username.stringValue];
+                [SettingsHandler setPassword:self.password.stringValue];
+                [SettingsHandler setToken:@""];
+                [SettingsHandler setRememberCredentials:NO];
+                self.rememberButton.state = NSOffState;
+                [[BITHockeyManager sharedHockeyManager] setToken:@""];
+                
+                if (self.delegate != nil && [self.delegate respondsToSelector:@selector(loginFailed:)])
+                    [self.delegate loginFailed:[NSString stringWithFormat:@"Login failed with error: %@", error.localizedDescription]];
+            }
+           
+            [self.progress stopAnimation:nil];
         }];
     }
     else
-    {
-        [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"Please insert a correct username and password in order to login"];
-        
-        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(loginFailed)])
-            [self.delegate loginFailed];
+    {        
+        if (self.delegate != nil && [self.delegate respondsToSelector:@selector(loginFailed:)])
+            [self.delegate loginFailed:@"Please insert a correct username and password in order to login"];
+        [self.progress stopAnimation:nil];
     }
 }
+
 
 #pragma mark - Alert Methods
 

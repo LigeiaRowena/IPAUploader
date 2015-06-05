@@ -9,8 +9,8 @@
 #import "ViewController.h"
 #import "AppDelegate.h"
 #import "BITHockeyManager.h"
-#import "FTPClient.h"
 #import "NSScrollView+MultiLine.h"
+#import "SettingsHandler.h"
 
 @interface ViewController ()
 
@@ -28,7 +28,22 @@
     CredentialViewController *credentialViewController = [[CredentialViewController alloc] initWithNibName:@"CredentialViewController" bundle:nil];
     credentialViewController.delegate = self;
     self.popover = [[NSPopover alloc] init];
+    self.popover.delegate = self;
     self.popover.contentViewController = credentialViewController;
+    
+    
+    //detect if the app has to remember credentials
+    if ([SettingsHandler rememberCredentials])
+    {
+        NSString *username = [SettingsHandler getUsername];
+        NSString *token = [SettingsHandler getToken];
+        [self.loginStatus setStringValue:[NSString stringWithFormat:@"Login successfully with email: %@\n Token: %@", username, token]];
+        [[BITHockeyManager sharedHockeyManager] setToken:token];
+    }
+    else
+    {
+        [self.loginStatus setStringValue:@"Please login..."];
+    }
 }
 
 - (void)viewDidLoad
@@ -36,10 +51,19 @@
     [super viewDidLoad];
 }
 
+#pragma mark - NSPopoverDelegate
+
+- (void)popoverWillShow:(NSNotification *)notification
+{
+    CredentialViewController *credentialViewController = (CredentialViewController*)self.popover.contentViewController;
+    [credentialViewController setupUI];
+}
+
 #pragma mark - CredentialViewControllerDelegate
 
-- (void)loginFailed
+- (void)loginFailed:(NSString*)error
 {
+    [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:error];
     [self.popover performClose:self.loginButton];
 }
 
@@ -69,6 +93,16 @@
 }
 
 #pragma mark - Actions
+
+- (IBAction)logout:(id)sender
+{
+    [self.loginStatus setStringValue:@"Logout successfully"];
+    [SettingsHandler setRememberCredentials:NO];
+    [SettingsHandler setUsername:@""];
+    [SettingsHandler setPassword:@""];
+    [SettingsHandler setToken:@""];
+    [[BITHockeyManager sharedHockeyManager] setToken:@""];
+}
 
 - (IBAction)login:(id)sender
 {
@@ -123,22 +157,6 @@
     }];
 }
 
-- (IBAction)uploadFTP:(id)sender
-{
-    [self.progressBar startAnimation:nil];
-
-    [FTPClient uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] withBlock:^(id response, NSError *error) {
-        NSLog(@"---uploadApp %@", response);
-        if (!response || error)
-            [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];
-        else
-            [self showAlertOfKind:NSInformationalAlertStyle WithTitle:@"Information" AndMessage:@"The upload of the file you selected finished successfully"];
-        [self.progressBar stopAnimation:nil];
-    }progressBlock:^(NSProgress *pr) {
-        NSString *progress = [NSString stringWithFormat:@"Progress: %@ (%lli of %lli bytes)", pr.localizedDescription, pr.completedUnitCount, pr.totalUnitCount];
-        [self.progressLabel setStringValue:progress];
-    }];
-}
 
 #pragma mark - Alert Methods
 

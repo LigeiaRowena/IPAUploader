@@ -9,8 +9,6 @@
 #import "BITHockeyManager.h"
 #import "BITHockeyAppClient.h"
 
-static char *alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-
 NSString *const kBITHockeySDKURL = @"https://sdk.hockeyapp.net/";
 
 // app id taken from the App detail in hockeyapp (only for the ping)
@@ -226,7 +224,8 @@ NSString *const kAuthUrl = @"https://rink.hockeyapp.net/api/2/auth_tokens";
 {
     // encoding credentials
     NSString *loginString = [@"" stringByAppendingFormat:@"%@:%@", email, password];
-    NSString *encodedLoginData = [BITHockeyManager encode:[loginString dataUsingEncoding:NSUTF8StringEncoding]];
+    NSData *authData = [loginString dataUsingEncoding:NSASCIIStringEncoding];
+    NSString *encodedLoginData = [authData base64EncodedStringWithOptions:0];
     NSString *authHeader = [@"Basic " stringByAppendingFormat:@"%@", encodedLoginData];
     NSDictionary *headers = @{@"Authorization" : authHeader};
 
@@ -236,41 +235,6 @@ NSString *const kAuthUrl = @"https://rink.hockeyapp.net/api/2/auth_tokens";
     }];
 }
 
-+ (NSString *)encode:(NSData *)plainText {
-    int encodedLength = (4 * (([plainText length] / 3) + (1 - (3 - ([plainText length] % 3)) / 3))) + 1;
-    unsigned char *outputBuffer = malloc(encodedLength);
-    unsigned char *inputBuffer = (unsigned char *)[plainText bytes];
-    
-    NSInteger i;
-    NSInteger j = 0;
-    int remain;
-    
-    for(i = 0; i < [plainText length]; i += 3) {
-        remain = [plainText length] - i;
-        
-        outputBuffer[j++] = alphabet[(inputBuffer[i] & 0xFC) >> 2];
-        outputBuffer[j++] = alphabet[((inputBuffer[i] & 0x03) << 4) |
-                                     ((remain > 1) ? ((inputBuffer[i + 1] & 0xF0) >> 4): 0)];
-        
-        if(remain > 1)
-            outputBuffer[j++] = alphabet[((inputBuffer[i + 1] & 0x0F) << 2)
-                                         | ((remain > 2) ? ((inputBuffer[i + 2] & 0xC0) >> 6) : 0)];
-        else
-            outputBuffer[j++] = '=';
-        
-        if(remain > 2)
-            outputBuffer[j++] = alphabet[inputBuffer[i + 2] & 0x3F];
-        else
-            outputBuffer[j++] = '=';
-    }
-    
-    outputBuffer[j] = 0;
-    
-    NSString *result = [NSString stringWithCString:outputBuffer length:strlen(outputBuffer)];
-    free(outputBuffer);
-    
-    return result;
-}
 
 // upload an app to an existing one or a new app
 + (NSURLSessionDataTask *)uploadApp:(NSString*)ipaPath releaseNotes:(NSString*)releaseNotes token:(NSString*)_token withBlock:(void (^)(id response, NSError *error))block progressBlock:(void (^)(NSProgress *pr))progressBlock

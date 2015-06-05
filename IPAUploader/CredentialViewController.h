@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @protocol CredentialViewControllerDelegate <NSObject>
-- (void)loginFailed;
+- (void)loginFailed:(NSString*)error;
 - (void)loginSucceed:(NSString*)message;
 @end
 
@@ -18,5 +18,9 @@
 @property (weak) IBOutlet NSTextField *username;
 @property (weak) IBOutlet NSSecureTextField *password;
 @property (assign) id <CredentialViewControllerDelegate> delegate;
+@property (weak) IBOutlet NSProgressIndicator *progress;
+@property (weak) IBOutlet NSButton *rememberButton;
+
+- (void)setupUI;
 
 @end

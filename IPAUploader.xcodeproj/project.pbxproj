@@ -31,8 +31,8 @@
 		DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */; };
 		DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */; };
 		DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */; };
-		DFB84B301B187DFE0058E54A /* FTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B2F1B187DFE0058E54A /* FTPClient.m */; };
-		DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DFB84B321B187FDC0058E54A /* FTPManager.m */; };
+		DF6CEA3A1B21A4ED0041256B /* SettingsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6CEA391B21A4ED0041256B /* SettingsHandler.m */; };
+		DF6CEA3C1B21A56C0041256B /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF6CEA3B1B21A56C0041256B /* settings.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,10 +80,9 @@
 		DF21BFC01B18A9DC00EB4751 /* CredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialViewController.h; sourceTree = "<group>"; };
 		DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialViewController.m; sourceTree = "<group>"; };
 		DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CredentialViewController.xib; sourceTree = "<group>"; };
-		DFB84B2E1B187DFE0058E54A /* FTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPClient.h; sourceTree = "<group>"; };
-		DFB84B2F1B187DFE0058E54A /* FTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPClient.m; sourceTree = "<group>"; };
-		DFB84B311B187FDC0058E54A /* FTPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FTPManager.h; sourceTree = "<group>"; };
-		DFB84B321B187FDC0058E54A /* FTPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FTPManager.m; sourceTree = "<group>"; };
+		DF6CEA381B21A4ED0041256B /* SettingsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsHandler.h; sourceTree = "<group>"; };
+		DF6CEA391B21A4ED0041256B /* SettingsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsHandler.m; sourceTree = "<group>"; };
+		DF6CEA3B1B21A56C0041256B /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +118,6 @@
 		DF060E941B0F6331003450C5 /* IPAUploader */ = {
 			isa = PBXGroup;
 			children = (
-				DFB84B2D1B187DF60058E54A /* FTP */,
 				DF0ACADA1B1330CB000B6558 /* HockeySDK */,
 				DF060EDC1B0F68BE003450C5 /* AFNetworking */,
 				DF060EBB1B0F6468003450C5 /* Helper */,
@@ -137,6 +135,7 @@
 				DF060EF91B0F6919003450C5 /* Security.framework */,
 				DF060E961B0F6331003450C5 /* Info.plist */,
 				DF060E9A1B0F6331003450C5 /* main.m */,
+				DF6CEA3B1B21A56C0041256B /* settings.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -164,6 +163,8 @@
 				DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */,
 				DF060EBC1B0F6478003450C5 /* IRTextFieldDrag.h */,
 				DF060EBD1B0F6478003450C5 /* IRTextFieldDrag.m */,
+				DF6CEA381B21A4ED0041256B /* SettingsHandler.h */,
+				DF6CEA391B21A4ED0041256B /* SettingsHandler.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -205,17 +206,6 @@
 				DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */,
 			);
 			path = HockeySDK;
-			sourceTree = "<group>";
-		};
-		DFB84B2D1B187DF60058E54A /* FTP */ = {
-			isa = PBXGroup;
-			children = (
-				DFB84B311B187FDC0058E54A /* FTPManager.h */,
-				DFB84B321B187FDC0058E54A /* FTPManager.m */,
-				DFB84B2E1B187DFE0058E54A /* FTPClient.h */,
-				DFB84B2F1B187DFE0058E54A /* FTPClient.m */,
-			);
-			path = FTP;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF060EB91B0F6400003450C5 /* ViewController.xib in Resources */,
+				DF6CEA3C1B21A56C0041256B /* settings.plist in Resources */,
 				DF060EA01B0F6331003450C5 /* MainMenu.xib in Resources */,
 				DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */,
 			);
@@ -289,10 +280,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
-				DFB84B331B187FDC0058E54A /* FTPManager.m in Sources */,
 				DF060EF41B0F68BE003450C5 /* AFSecurityPolicy.m in Sources */,
 				DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */,
 				DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */,
+				DF6CEA3A1B21A4ED0041256B /* SettingsHandler.m in Sources */,
 				DF060E9B1B0F6331003450C5 /* main.m in Sources */,
 				DF0ACAE11B1330CB000B6558 /* BITHockeyAppClient.m in Sources */,
 				DF060EF11B0F68BE003450C5 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -304,7 +295,6 @@
 				DF0ACAE21B1330CB000B6558 /* BITHTTPOperation.m in Sources */,
 				DF060EF21B0F68BE003450C5 /* AFHTTPSessionManager.m in Sources */,
 				DF060EF31B0F68BE003450C5 /* AFNetworkReachabilityManager.m in Sources */,
-				DFB84B301B187DFE0058E54A /* FTPClient.m in Sources */,
 				DF060EF71B0F68BE003450C5 /* AFURLResponseSerialization.m in Sources */,
 				DF060EF81B0F68BE003450C5 /* AFURLSessionManager.m in Sources */,
 				DF060E991B0F6331003450C5 /* AppDelegate.m in Sources */,
