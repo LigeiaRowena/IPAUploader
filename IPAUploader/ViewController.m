@@ -31,6 +31,9 @@
     self.popover.delegate = self;
     self.popover.contentViewController = credentialViewController;
     
+    // create a second window to show all the apps of your hockeryapp account
+    self.appsWindowController = [[AppsWindowController alloc] initWithWindowNibName:@"AppsWindowController"];
+    
     
     //detect if the app has to remember credentials
     if ([SettingsHandler rememberCredentials])
@@ -94,6 +97,29 @@
 
 #pragma mark - Actions
 
+- (IBAction)getInfoApps:(id)sender
+{
+    [self.progressBarGetInfo startAnimation:nil];
+    
+    NSString *token = [[BITHockeyManager sharedHockeyManager] getToken];
+    if (token == nil)
+    {
+        [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"You have to login to your HockeyApp account"];
+        return;
+    }
+    
+    [BITHockeyManager getAllAppsWithToken:token block:^(id response, NSError *error) {
+        if (!response || error)
+            [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"Your request failed: please try again"];
+        else
+        {
+            self.appsWindowController.data = response[@"apps"];
+            [self.appsWindowController showWindow:nil];
+        }
+        [self.progressBarGetInfo stopAnimation:nil];
+    }];
+}
+
 - (IBAction)logout:(id)sender
 {
     [self.loginStatus setStringValue:@"Logout successfully"];
@@ -135,7 +161,7 @@
 
 - (IBAction)uploadHockeyApp:(id)sender
 {
-    [self.progressBar startAnimation:nil];
+    [self.progressBarUpload startAnimation:nil];
     
     NSString *token = [[BITHockeyManager sharedHockeyManager] getToken];
     if (token == nil)
@@ -145,12 +171,11 @@
     }
     
     [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] token:@"" withBlock:^(id response, NSError *error) {
-        NSLog(@"---uploadApp %@", response);
         if (!response || error)
             [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];
         else
             [self showAlertOfKind:NSInformationalAlertStyle WithTitle:@"Information" AndMessage:@"The upload of the file you selected finished successfully"];
-        [self.progressBar stopAnimation:nil];
+        [self.progressBarUpload stopAnimation:nil];
     }progressBlock:^(NSProgress *pr) {
         NSString *progress = [NSString stringWithFormat:@"Progress: %@ (%lli of %lli bytes)", pr.localizedDescription, pr.completedUnitCount, pr.totalUnitCount];
         [self.progressLabel setStringValue:progress];
