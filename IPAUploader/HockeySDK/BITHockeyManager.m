@@ -214,8 +214,14 @@ NSString *const kAuthUrl = @"https://rink.hockeyapp.net/api/2/auth_tokens";
 {
     NSDictionary *headers = @{kAppTokenKey : _token};
     return [self get:kAppsUrl headers:headers parameters:nil withBlock:^(id response, NSError *error) {
+		NSMutableArray *temp = @[].mutableCopy;
+		for (NSDictionary *item in response[@"apps"])
+		{
+			BITHockeyAppModel *model = [[BITHockeyAppModel alloc] initWithJSON:item];
+			[temp addObject:model];
+		}
         if (block)
-            block(response, error);
+            block(temp, error);
     }];
 }
 

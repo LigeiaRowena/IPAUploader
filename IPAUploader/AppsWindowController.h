@@ -10,6 +10,6 @@
 
 @interface AppsWindowController : NSWindowController
 
-@property (nonatomic, strong) NSArray *data;
+- (void)reloadApps:(NSArray*)data;
 
 @end

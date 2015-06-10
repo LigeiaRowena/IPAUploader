@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+#import "BITHockeyAppModel.h"
 
 @interface BITHockeyManager : NSObject 
 

@@ -113,8 +113,8 @@
             [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"Your request failed: please try again"];
         else
         {
-            self.appsWindowController.data = response[@"apps"];
             [self.appsWindowController showWindow:nil];
+			[self.appsWindowController reloadApps:response];
         }
         [self.progressBarGetInfo stopAnimation:nil];
     }];

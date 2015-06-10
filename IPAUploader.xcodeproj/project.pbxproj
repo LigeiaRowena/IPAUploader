@@ -31,11 +31,12 @@
 		DF2054091B176976007258F8 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2054081B176976007258F8 /* NSScrollView+MultiLine.m */; };
 		DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */; };
 		DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */; };
-		DF249B651B2736BE0062734D /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DF249B641B2736BE0062734D /* icon.icns */; };
+		DF249B681B27464D0062734D /* BITHockeyAppModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DF249B671B27464D0062734D /* BITHockeyAppModel.m */; };
 		DF6364871B21E7280001E62E /* AppsWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6364851B21E7280001E62E /* AppsWindowController.m */; };
 		DF6364881B21E7280001E62E /* AppsWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DF6364861B21E7280001E62E /* AppsWindowController.xib */; };
 		DF6CEA3A1B21A4ED0041256B /* SettingsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DF6CEA391B21A4ED0041256B /* SettingsHandler.m */; };
 		DF6CEA3C1B21A56C0041256B /* settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF6CEA3B1B21A56C0041256B /* settings.plist */; };
+		DFD47C1C1B28242600E91BC6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = DFD47C1B1B28242600E91BC6 /* icon.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,13 +84,15 @@
 		DF21BFC01B18A9DC00EB4751 /* CredentialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CredentialViewController.h; sourceTree = "<group>"; };
 		DF21BFC11B18A9DC00EB4751 /* CredentialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CredentialViewController.m; sourceTree = "<group>"; };
 		DF21BFC21B18A9DC00EB4751 /* CredentialViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CredentialViewController.xib; sourceTree = "<group>"; };
-		DF249B641B2736BE0062734D /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		DF249B661B27464D0062734D /* BITHockeyAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BITHockeyAppModel.h; sourceTree = "<group>"; };
+		DF249B671B27464D0062734D /* BITHockeyAppModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BITHockeyAppModel.m; sourceTree = "<group>"; };
 		DF6364841B21E7280001E62E /* AppsWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppsWindowController.h; sourceTree = "<group>"; };
 		DF6364851B21E7280001E62E /* AppsWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppsWindowController.m; sourceTree = "<group>"; };
 		DF6364861B21E7280001E62E /* AppsWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AppsWindowController.xib; sourceTree = "<group>"; };
 		DF6CEA381B21A4ED0041256B /* SettingsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsHandler.h; sourceTree = "<group>"; };
 		DF6CEA391B21A4ED0041256B /* SettingsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsHandler.m; sourceTree = "<group>"; };
 		DF6CEA3B1B21A56C0041256B /* settings.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = settings.plist; sourceTree = "<group>"; };
+		DFD47C1B1B28242600E91BC6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,7 +140,7 @@
 		DF060E951B0F6331003450C5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				DF249B641B2736BE0062734D /* icon.icns */,
+				DFD47C1B1B28242600E91BC6 /* icon.icns */,
 				DF060EFD1B0F6929003450C5 /* CoreServices.framework */,
 				DF060EFB1B0F6922003450C5 /* SystemConfiguration.framework */,
 				DF060EF91B0F6919003450C5 /* Security.framework */,
@@ -215,6 +218,8 @@
 				DF0ACADE1B1330CB000B6558 /* BITHTTPOperation.m */,
 				DF0ACADF1B1330CB000B6558 /* BITHockeyManager.h */,
 				DF0ACAE01B1330CB000B6558 /* BITHockeyManager.m */,
+				DF249B661B27464D0062734D /* BITHockeyAppModel.h */,
+				DF249B671B27464D0062734D /* BITHockeyAppModel.m */,
 			);
 			path = HockeySDK;
 			sourceTree = "<group>";
@@ -281,7 +286,7 @@
 				DF6CEA3C1B21A56C0041256B /* settings.plist in Resources */,
 				DF060EA01B0F6331003450C5 /* MainMenu.xib in Resources */,
 				DF21BFC41B18A9DC00EB4751 /* CredentialViewController.xib in Resources */,
-				DF249B651B2736BE0062734D /* icon.icns in Resources */,
+				DFD47C1C1B28242600E91BC6 /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,6 +298,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF060EB81B0F6400003450C5 /* ViewController.m in Sources */,
+				DF249B681B27464D0062734D /* BITHockeyAppModel.m in Sources */,
 				DF060EF41B0F68BE003450C5 /* AFSecurityPolicy.m in Sources */,
 				DF21BFC31B18A9DC00EB4751 /* CredentialViewController.m in Sources */,
 				DF0ACAE31B1330CB000B6558 /* BITHockeyManager.m in Sources */,
