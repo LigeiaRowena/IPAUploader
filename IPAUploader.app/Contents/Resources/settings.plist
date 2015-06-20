@@ -2,13 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>Token</key>
-	<string></string>
-	<key>Username</key>
-	<string></string>
 	<key>Password</key>
-	<string></string>
+	<string>Objectivec9</string>
 	<key>Remember</key>
-	<false/>
+	<true/>
+	<key>Token</key>
+	<string>0fb12912ba344081b41495c0f60d66f1</string>
+	<key>Username</key>
+	<string>francesca.corsini@wuerth-phoenix.com</string>
 </dict>
 </plist>

@@ -170,7 +170,7 @@
         return;
     }
     
-    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] token:@"" withBlock:^(id response, NSError *error) {
+    [BITHockeyManager uploadApp:self.ipaField.stringValue releaseNotes:[self.releaseNotes getStringValue] token:token withBlock:^(id response, NSError *error) {
         if (!response || error)
             [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Warning" AndMessage:@"The upload of the file you selected failed: please try again"];
         else
